@@ -1,4 +1,8 @@
 const puppeteer = require('puppeteer');
+const pageUrl = 'https://webscraper.io/test-sites/e-commerce/allinone';
+const sideBarComputerSelector = '#side-menu > li:nth-child(2)';
+const sideBarComputerLaptopSelector = '#side-menu > li.active > ul > li:nth-child(1)';
+const productTitlesSelector = 'body > div.wrapper > div.container.test-site > div > div.col-md-9 > div > div > div.thumbnail > div.caption';
 
 const scrapeSite = async (productName) => {
 
@@ -8,12 +12,11 @@ const scrapeSite = async (productName) => {
         width: 1366,
         height: 768
     });
-    await page.goto('https://webscraper.io/test-sites/e-commerce/allinone');
-    await page.waitForSelector('#side-menu > li:nth-child(2)');
-    await page.click('#side-menu > li:nth-child(2)');
-    await page.waitForSelector('#side-menu > li.active > ul > li:nth-child(1)');
-    await page.click('#side-menu > li.active > ul > li:nth-child(1)');
-    const productTitlesSelector = 'body > div.wrapper > div.container.test-site > div > div.col-md-9 > div > div > div.thumbnail > div.caption';
+    await page.goto(pageUrl);
+    await page.waitForSelector(sideBarComputerSelector);
+    await page.click(sideBarComputerSelector);
+    await page.waitForSelector(sideBarComputerLaptopSelector);
+    await page.click(sideBarComputerLaptopSelector);
     await page.waitForSelector(productTitlesSelector);
     const products = await page.evaluate(productTitlesSelector => {
         const productCaptions = Array.from(document.querySelectorAll(productTitlesSelector));
