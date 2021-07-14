@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+
 const pageUrl = 'https://webscraper.io/test-sites/e-commerce/allinone';
 const sideBarComputerSelector = '#side-menu > li:nth-child(2)';
 const sideBarComputerLaptopSelector = '#side-menu > li.active > ul > li:nth-child(1)';
